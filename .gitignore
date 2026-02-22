@@ -1,0 +1,14 @@
+node_modules
+.env
+.env.local
+.env.*.local
+dist
+dist-ssr
+*.local
+.DS_Store
+.vercel
+.idea
+*.swp
+*.swo
+*~
+.vscode
