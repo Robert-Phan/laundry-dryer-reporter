@@ -106,8 +106,8 @@ export async function getMachineStats(machineId: number): Promise<MachineStats |
 
 export async function getAllMachinesStats(): Promise<MachineStats[]> {
   const stats: MachineStats[] = []
-  for (let i = 1; i <= 4; i++) {
-    const machineStats = await getMachineStats(i)
+  for (let i = 0; i < 4; i++) {
+    const machineStats = await getMachineStats(i + 325);
     if (machineStats) {
       stats.push(machineStats)
     }

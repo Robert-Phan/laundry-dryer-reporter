@@ -11,7 +11,8 @@ export const ReportingPage: React.FC = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const navigate = useNavigate()
 
-  const defaultMachineId = machineId ? parseInt(machineId, 10) : 1
+  const defaultMachineId = machineId ? parseInt(machineId, 10) : 325
+  console.log(defaultMachineId)
 
   const handleSubmit = async (data: FormData) => {
     setIsLoading(true)

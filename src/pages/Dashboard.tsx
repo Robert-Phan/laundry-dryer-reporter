@@ -31,10 +31,17 @@ export const Dashboard: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Dryer Machine Status</h1>
+        <h1>Gorman Hall Dryer Machine Status</h1>
         <p className={styles.subtitle}>Click on a machine to view details and submit reports</p>
       </header>
 
+      <button 
+        className={styles.reportButton}
+        onClick={() => navigate('/report')}
+      >
+        + New Report
+      </button>
+      
       {isLoading ? (
         <div className={styles.loading}>Loading machine status...</div>
       ) : (
@@ -49,12 +56,12 @@ export const Dashboard: React.FC = () => {
         </div>
       )}
 
-      <button 
+      {/* <button 
         className={styles.reportButton}
         onClick={() => navigate('/report')}
       >
         + New Report
-      </button>
+      </button> */}
     </div>
   )
 }

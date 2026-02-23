@@ -10,6 +10,18 @@ interface ReportCardProps {
 export const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
   const timeAgo = formatDistanceToNow(new Date(report.created_at), { addSuffix: true })
 
+  const tempSettingFormat = {
+    'delicates': "Delicates",
+    'no': "No Heat",
+    'low': "Low Heat",
+    'med': "Medium Heat",
+    'high': "High Heat"
+  }
+
+  function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -22,7 +34,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
       <div className={styles.content}>
         <div className={styles.row}>
           <span className={styles.label}>Temperature Setting:</span>
-          <span className={styles.value}>{report.temperature_setting}</span>
+          <span className={styles.value}>{tempSettingFormat[report.temperature_setting]}</span>
         </div>
 
         <div className={styles.row}>
@@ -40,7 +52,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
         {report.load_type && (
           <div className={styles.row}>
             <span className={styles.label}>Load Type:</span>
-            <span className={styles.value}>{report.load_type}</span>
+            <span className={styles.value}>{capitalizeFirstLetter(report.load_type)}</span>
           </div>
         )}
 

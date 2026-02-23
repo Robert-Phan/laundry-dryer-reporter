@@ -31,6 +31,11 @@ export const ReportForm: React.FC<ReportFormProps> = ({
     if (type === 'checkbox') {
       const checked = (e.currentTarget as HTMLInputElement).checked
       setFormData(prev => ({ ...prev, [name]: checked }))
+    } else if (type === 'radio') {
+      setFormData(prev => ({
+        ...prev,
+        is_broken: value === 'true'
+      }))
     } else if (type === 'number') {
       setFormData(prev => ({
         ...prev,
@@ -56,32 +61,49 @@ export const ReportForm: React.FC<ReportFormProps> = ({
           value={formData.machine_id}
           onChange={handleChange}
         >
-          <option value={1}>Machine 1</option>
-          <option value={2}>Machine 2</option>
-          <option value={3}>Machine 3</option>
-          <option value={4}>Machine 4</option>
+          <option value={325}>325</option>
+          <option value={326}>326</option>
+          <option value={327}>327</option>
+          <option value={328}>328</option>
         </select>
       </div>
 
       <div className={styles.formGroup}>
-        <label className={styles.checkboxLabel}>
-          <input
-            type="checkbox"
-            name="is_broken"
-            checked={formData.is_broken}
+        <label>Is it broken?</label>
+        <div className={styles.radioGroup}>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="is_broken"
+              value="false"
             onChange={handleChange}
-          />
-          <span>Machine is broken</span>
-        </label>
+              checked={!formData.is_broken}
+              // onChange={() => setFormData(prev => ({ ...prev, is_broken: false }))}
+            />
+            <span>No</span>
+          </label>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="is_broken"
+              value="true"
+              checked={formData.is_broken}
+              // onChange={() => setFormData(prev => ({ ...prev, is_broken: true }))}
+            onChange={handleChange}
+            />
+            <span>Yes</span>
+          </label>
+        </div>
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="temperature_setting">Temperature Setting</label>
+        <label htmlFor="temperature_setting">What did you use for temperature setting?</label>
         <select
           id="temperature_setting"
           name="temperature_setting"
           value={formData.temperature_setting}
           onChange={handleChange}
+          defaultValue={'med'}
         >
           <option value="delicates">Delicates</option>
           <option value="no">No Heat</option>
@@ -92,7 +114,7 @@ export const ReportForm: React.FC<ReportFormProps> = ({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="reran_count">Number of Times Reran</label>
+        <label htmlFor="reran_count">Did you rerun the dryer at all? How many times?</label>
         <input
           id="reran_count"
           type="number"
@@ -104,21 +126,21 @@ export const ReportForm: React.FC<ReportFormProps> = ({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="load_weight_kg">Load Weight (kg) - Optional</label>
+        <label htmlFor="load_weight_kg">How much did your load weigh (in lbs)? (optional)</label>
         <input
           id="load_weight_kg"
           type="number"
           name="load_weight_kg"
           step="0.1"
           min="0"
-          placeholder="e.g., 2.5"
+          placeholder="e.g., 2.5lbs"
           value={formData.load_weight_kg ?? ''}
           onChange={handleChange}
         />
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="load_type">Load Type - Optional</label>
+        <label htmlFor="load_type">What kind of load was it? (optional)</label>
         <select
           id="load_type"
           name="load_type"
@@ -134,7 +156,7 @@ export const ReportForm: React.FC<ReportFormProps> = ({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="comments">Comments - Optional</label>
+        <label htmlFor="comments">Comments (optional)</label>
         <textarea
           id="comments"
           name="comments"
